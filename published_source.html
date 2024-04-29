@@ -1,0 +1,2279 @@
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh-TW" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>學術研發服務網</title>
+<link href="/NSCWebFront/modules/css/design.css" rel="stylesheet" type="text/css" />
+<link href="/NSCWebFront/modules/css/print.css" rel="stylesheet" media="print" type="text/css" />
+
+
+
+
+<script language="javascript" type="text/javascript" src="/NSCWebFront/modules/common/jqueryCommon/js/jquery-1.10.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="/NSCWebFront/modules/common/jqueryCommon/js/jquery.validate.min.js"></script>
+<script language="javascript" type="text/javascript" src="/NSCWebFront/modules/common/jqueryCommon/js/jquery-ui-1.10.3.custom.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/NSCWebFront/modules/common/jqueryCommon/ui/themes/base/jquery-ui.min.css">
+
+<script type="text/javascript">
+	jQuery.extend(jQuery.validator.messages, {
+	    required: "必填",
+	    email: "Email格式錯誤",
+	    date: "日期格式錯誤",
+	    url: "URL格式錯誤",
+	    number: "非數字",
+	    digits: "非數字",
+	    maxlength: jQuery.validator.format("長度需<={0}"),
+	    minlength: jQuery.validator.format("長度需>={0}")
+	});
+	
+	$(function() {
+		//民國年處理
+		var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
+	    $.extend($.datepicker, {
+	        _generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
+	            var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
+	            if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
+	                htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
+	                    if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911 + "年" );
+	                }).end().end().get(0).outerHTML;
+	            }
+	            return htmlYearMonth;
+	        },
+	        _setDateFromField: function(inst, noDefault) {
+	        	var dateFormat = this._get(inst, 'dateFormat');
+	        	var dates = inst.input.val();
+	        	var date, defaultDate;
+	        	defaultDate = this._getDefaultDate(inst);
+	        	date = defaultDate;
+	        	try {
+	        		if(dates.length>0) {
+		        		var dateArr = dates.split("/");
+		        		var year = parseInt(dateArr[0], 10) + 1911;
+		        		var month = parseInt(dateArr[1], 10);
+		        		var day = parseInt(dateArr[2], 10);
+		        		date = new Date(year, month-1, day);
+	        		}
+ 				} catch (event) {
+	        		this.log(event);
+	        		dates = (noDefault ? '' : dates);
+ 				}
+        		inst.selectedDay = date.getDate();
+        		inst.drawMonth = inst.selectedMonth = date.getMonth();
+        		inst.drawYear = date.getFullYear();
+        		inst.selectedYear = date.getFullYear();
+        		inst.currentDay = (dates ? date.getDate() : 0);
+        		inst.currentMonth = (dates ? date.getMonth() : 0);
+        		inst.currentYear = (dates ? date.getFullYear() : 0);
+        		this._adjustInstDate(inst);
+	        }
+	    });
+	    
+		$( ".datepicker" ).each(function(){
+			$(this).datepicker({
+				closeText: '關閉',
+				prevText: '&#x3C;上月',
+				nextText: '下月&#x3E;',
+				currentText: '今天',
+				monthNames: ['一月','二月','三月','四月','五月','六月',
+				'七月','八月','九月','十月','十一月','十二月'],
+				monthNamesShort: ['一月','二月','三月','四月','五月','六月',
+				'七月','八月','九月','十月','十一月','十二月'],
+				dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+				dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+				dayNamesMin: ['日','一','二','三','四','五','六'],
+				weekHeader: '周',
+				dateFormat: 'yy/mm/dd',
+				firstDay: 1,
+				isRTL: false,
+				showMonthAfterYear: true,
+				yearSuffix: '',//年
+				changeMonth: true,
+				changeYear: true,
+				showButtonPanel: true,
+				defaultDate: +0,
+				showOn: "button",
+				buttonImage: "/NSCWebFront/modules/common/jqueryCommon/ui/icon/sys-calendar.gif",
+				buttonImageOnly: true,
+				yearRange: "-5:+5",
+				buttonText: "點選日期",
+				//以下為民國年處理
+		        onSelect: function (dateText, inst) {
+		            var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
+		            var reM = /m+/g;
+		            var reD = /d+/g;
+		            var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
+		                m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 : "0" + String(inst.selectedMonth + 1),
+		                d: String(inst.selectedDay).length != 1 ? inst.selectedDay : "0" + String(inst.selectedDay)
+		            };
+		            $.each(objDate, function (k, v) {
+		                var re = new RegExp(k + "+");
+		                dateFormate = dateFormate.replace(re, v);
+		            });
+		            inst.input.val(dateFormate);
+		        }
+			});
+        });
+	});
+	$(function() {
+	    $( document ).tooltip();
+	  });
+</script>
+<script type="text/javascript">
+	function setSorting(arrowUp, arrowDown){
+		var sortCondition = $("#sortCondition").val();
+		if( "undefined"!=sortCondition && sortCondition!=null ){//已點選拿掉連結，只顯示箭頭
+			if( sortCondition == arrowUp ){
+				document.write( "<span id=\"" + arrowUp + "\">▲</span>" );
+				document.write( "<span id=\"" + arrowDown + "\"><a href=\"#\" onclick=\"doSortPage( '" + arrowDown + "' )\">▼</a></span>" );
+			}else if( sortCondition == arrowDown ){
+				document.write( "<span id=\"" + arrowUp + "\"><a href=\"#\" onclick=\"doSortPage( '" + arrowUp + "' )\">▲</a></span>" );
+				document.write( "<span id=\"" + arrowUp + "\">▼</span>" );
+			}else{
+				document.write( "<span id=\"" + arrowUp + "\"><a href=\"#\" onclick=\"doSortPage( '" + arrowUp + "' )\">▲</a></span>" );
+				document.write( "<span id=\"" + arrowDown + "\"><a href=\"#\" onclick=\"doSortPage( '" + arrowDown + "' )\">▼</a></span>" );
+			}
+		}
+	}
+	function doSortPage(sortCondition){
+		$("#sortCondition").val(sortCondition);
+		doPage();
+	}
+	function doPage(page, pageSize){
+		$("#currentPage").val(page);
+		$("#pageSize").val(pageSize);
+		changePage();//需自行定義
+	}
+</script>
+<style type="text/css">
+	#saveForm label.error,#form1 label.error,#form2 label.error { 
+		margin-left: 3px;
+		color: red;
+		width: auto;
+		display: inline;
+	}
+	.ui-datepicker-trigger{
+		vertical-align:middle;
+	}
+	.ui-dialog .ui-dialog-titlebar{
+		padding: .2em .8em;
+	}
+	.ui-dialog-title{
+		font-size: 16px;
+	}
+</style>
+<script type="text/javascript"></script>
+</head>
+<body>
+	<div class="wrap ">
+		
+
+
+<script>
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); 
+
+  ga('create', 'UA-40495452-5', 'most.gov.tw');
+
+  ga('send', 'pageview');
+
+</script>
+
+<div id="zone.head" class="top">
+	
+		
+		<div class="header" style="background-image: url(/NSCWebFront/modules/images/headerbg_talent.jpg)">
+	
+		<h1>
+		</h1>
+		<div class="nav">
+			<ul>
+				<li><a href="http://www.most.gov.tw/"><img src="/NSCWebFront/modules/images/nav01.gif" alt='科技部首頁' title='科技部首頁' /></a></li>
+				<li><a href="https://ap0512.most.gov.tw/was2/award/AsAwardMultiQuery.aspx" target="_blank"><img src="/NSCWebFront/modules/images/nav09.gif" alt="學術補助獎勵查詢" title="學術補助獎勵查詢" /></a></li>
+				
+					
+					
+						<li><a href="talentSearch.do?action=initSearchList&LANG=eng"><img src="/NSCWebFront/modules/images/nav07.gif" alt='英文版' title='英文版' /></a></li>
+					
+				
+			</ul>
+		</div>
+	</div>
+	<!--header End-->
+</div>
+		<table class="layout" summary="layout table">
+			<tr>
+				<td class="center"><div class="main">
+						<div class="accesskey">
+							<a href="#" title="中央內容區塊" accesskey="C">:::</a>
+						</div>
+						<div id="zone.content11">
+							<div class="lp">
+								
+
+
+
+
+
+
+<script type="text/javascript">
+	function checkClass( item, url ){
+		if( $(item).hasClass('no') )  {
+			alert('不公開');
+		}else{
+			location.href = url;
+		} 
+	}
+</script>
+<h2>
+	<span>研究人才詳細資料</span>
+	<div align="right">
+		<input type="button"  value="重新查詢" class="btn" onclick="self.location='talentSearch.do?action=initSearchList&LANG=chi'" />
+	</div>
+</h2>
+<div class="ap">
+	<div class="tab">
+	    <ul>
+	        <li onclick="checkClass(this, 'talentSearch.do?action=initBasic&rsNo=6b746c6fd1244fdb9b127bcdc6926492&LANG=chi')" class="" >
+	        	<a href="#">基本資料</a>
+	        </li>
+	        <li onclick="checkClass(this, 'talentSearch.do?action=initRsm02&rsNo=6b746c6fd1244fdb9b127bcdc6926492&LANG=chi')" class=" no" >
+	        	<a href="#">
+	        		
+	        			<img src="/NSCWebFront/modules/images/icon_lock02.gif" alt="" />
+	        		
+	        		主要學歷
+	        	</a>
+	        </li>
+	        <li onclick="checkClass(this, 'talentSearch.do?action=initRsm03&rsNo=6b746c6fd1244fdb9b127bcdc6926492&LANG=chi')" class=" no" >
+	        	<a href="#">
+	        		
+	        			<img src="/NSCWebFront/modules/images/icon_lock02.gif" alt="" />
+	        		
+	        		相關經歷
+	        	</a>
+	        </li>
+	        <li onclick="checkClass(this, 'talentSearch.do?action=initRsm05&rsNo=6b746c6fd1244fdb9b127bcdc6926492&LANG=chi')" class="here " >
+	        	<a href="#">
+	        		
+	        		著作目錄
+	        	</a>
+	        </li>
+	        <li onclick="checkClass(this, 'talentSearch.do?action=initRsm06&rsNo=6b746c6fd1244fdb9b127bcdc6926492&LANG=chi')" class=" no" >
+	        	<a href="#">
+	        		
+	        			<img src="/NSCWebFront/modules/images/icon_lock02.gif" alt="" />
+	        		
+	        		專利
+	        	</a>
+	        </li>
+	        <li onclick="checkClass(this, 'talentSearch.do?action=initRsm07&rsNo=6b746c6fd1244fdb9b127bcdc6926492&LANG=chi')" class=" no" >
+	        	<a href="#">
+	        		
+	        			<img src="/NSCWebFront/modules/images/icon_lock02.gif" alt="" />
+	        		
+	        		技術移轉
+	        	</a>
+	        </li>
+	        <li onclick="checkClass(this, 'talentSearch.do?action=initRsm08&rsNo=6b746c6fd1244fdb9b127bcdc6926492&LANG=chi')" class=" no" >
+	        	<a href="#">
+	        		
+	        			<img src="/NSCWebFront/modules/images/icon_lock02.gif" alt="" />
+	        		
+	        		著作授權
+	        	</a>
+	        </li>
+	        <li onclick="checkClass(this, 'talentSearch.do?action=initRsm09&rsNo=6b746c6fd1244fdb9b127bcdc6926492&LANG=chi')" class=" no" >
+	        	<a href="#">
+	        		
+	        			<img src="/NSCWebFront/modules/images/icon_lock02.gif" alt="" />
+	        		
+	        		其他績效
+	        	</a>
+	        </li>
+	        <li onclick="checkClass(this, 'talentSearch.do?action=initRsm17new&rsNo=6b746c6fd1244fdb9b127bcdc6926492&LANG=chi')" class=" " >
+	        	<a href="#">計畫總覽</a>
+	        </li>
+	    </ul>
+	</div>
+</div>
+								<hr />
+								
+                               		
+                               			
+											
+											
+											
+												<div class="c30Tblist2">
+													<table class = "table">
+														<tr>
+															<th scope="col" width="60">出版年月</th><!-- 出版年月 -->
+															<th scope="col" width="70">著作類別</th><!-- 著作類別 -->
+															<th scope="col">著作名稱</th><!-- 著作名稱 -->
+															<th scope="col">作者</th><!-- 作者 -->
+															<th scope="col">收錄出處</th><!-- 收錄出處 -->
+														</tr>
+														
+															<tr>
+																<td>2020-12</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>A Method of Music Autotagging Based on Audio and Lyrics</td>
+																<td>Hei-Chia Wang*, Sheng-Wei Syu, Papis Wongchaisuwat </td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Multimedia Tools and Applications
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2020-12</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Automatic Paper Writing based on RNN and the TextRank Algorithm</td>
+																<td>Hei-Chia Wang*, Wei-Ching Hsiao,and Sheng-Han Chang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Applied Soft Computing
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2020-12</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Spam detection and high-quality features to analyse question-answer pairs</td>
+																<td>Hei Chia Wang*, Yu Hung Chiang, and Si Ting Lin</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					The Electronic Library
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2020-11</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Using community information for natural disaster alerts</td>
+																<td>Chun-Chieh Chen and Hei-Chia Wang*</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Journal of Information Science
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2020-09</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Computer-supported collaboration and written communication: Tools, methods, and approaches for second language learners in higher education</td>
+																<td>Neil E. Barrett, Gi-Zen Liu & Hei-Chia Wang </td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Human Behavior and Emerging Technologies
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2020-03</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>NoteSum: An Integrated Note Summarization System by Using Text Mining Algorithms</td>
+																<td>Hei Chia Wang*, Wei-Fan Chen, & Chen-Yu Lin</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Information Sciences
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2020-02</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Seamless learning for oral presentations: Designing for performance needs</td>
+																<td>Neil E. Barrett, Gi-Zen Liu, Hei-Chia Wang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Computer Assisted Language Learning
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2019-11</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Personal research idea recommendation using research trends and a hierarchical topic model</td>
+																<td>Wang, HC*., Hsu, TT. & Sari, Y</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Scientometrics
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2019-04</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Use of multi-lexicons to analyse semantic features for summarization of touring reviews </td>
+																<td>Wang, Hei Chia; Chiang, Yu Hung; Sun, YiFeng </td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					The Electronic Library 
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2019-01</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>結合動態分群人造蜂群演算法之自動化分群系統</td>
+																<td>邱哲夫, 王惠嘉</td>
+																<td>
+																	
+																		
+																			
+																				
+																					資訊管理學報<br/>Journal of Information Management
+																				
+																				
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2018-10</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Constructing Patent Maps Using Text Mining to Sustainably Detect Potential Technological Opportunities</td>
+																<td>Hei Chia Wang *, Yung Chang Chi and Ping Lun Hsin</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Sustainability
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2018-03</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Adapting Topic Map and Social Influence to the Personalized Hybrid Recommender System Article</td>
+																<td>Hei-Chia Wang, Hsu-Tung Jhoua, Yu-Shan Tsai</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Information Sciences
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2018-03</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Automatic Meeting Summarization and Topic Detection System</td>
+																<td> Huang, Tai-Chia ; Hsieh, Chia-Hsuan ; Wang, Hei-Chia*</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Data Technologies and Applications
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2017-08</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Considering Social Information in Constructing Research  Topic Maps</td>
+																<td>Wang, Hei Chia; Yu Hung, Chiang; Huang, Yen Tzu</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					The Electronic Library
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2017-01</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Answer selection and expert finding in community question answering services: a question answering promoter,</td>
+																<td>Hei-Chia Wang, Che-Tsung Yang, Yi-Hao Yen </td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Program: electronic library and information systems
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2016-02</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Enhanced particle swarm optimization with self-adaptation on entropy-based inertia weight</td>
+																<td>Hei-Chia Wang and Che-Tsung Yang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					IEICE Transaction Information and System
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2016-02</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>The Effect of Online Peer Assessment in Engineering
+Education: A Quasi-experimental Study</td>
+																<td>Hei-Chia Wang, Yi-Jung Hsieh and Wei-Fan Chen</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					International Journal of Engineering Education
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2015-12</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>QoS-driven selection of web service considering group preference, Computer Networks</td>
+																<td>Hei-Chia Wang, Wei-PinChiu, Suei-ChihWu</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Computer Networks
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2015-07</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Enhanced Particle Swarm Optimization with Self-Adaptation Based on Fitness-Weighted Acceleration Coefficients</td>
+																<td>Hei-Chia Wang & Che-Tsung Yang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Intelligent Automation & Soft Computing
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2015-04</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>The Effects of the In-flipped Classroom on the Learning Environment of Database Engineering</td>
+																<td>Yu-Hung Chiang and Hei-Chia Wang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					 International Journal of Engineering Education
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2015-01</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>A feature selection approach for automatic e-book classification based on discourse segmentation</td>
+																<td>Jiunn-Liang Guo, Hei-Chia Wang, Ming-Way Lai </td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Program: electronic library and information
+systems
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2015-  </td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Effects of firm size and geographical proximity on different models of interaction between university and firm: A case study</td>
+																<td>Tien-Chu Lin, Shiann-Far Kung, Hei-Chia Wang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Asia Pacific Management Review
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2014-06</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Using positive and negative patterns to extract information from journal articles regarding the regulation of a target gene by a transcription factor</td>
+																<td>Hei Chia Wang, Tock-Kheng KOOI; Hung-Yu KAO, PhD; Shih-Chieh LIN; Shaw-Jenq TSAI</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Computers in Biology and Medicine
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2014-  </td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>A semi-supervised weighted pattern-learning approach for extraction of gene regulation relationships from scientific literature</td>
+																<td>Yi-Tsung Tang, Hung-Yu Kao, Shaw-Jenq Tsai, Hei-Chia Wang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					International Journal of Data Mining and Bioinformatics
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2013-07</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>An Opinion Feature Extraction Approach Based on a Multidimensional Sentence Analysis Model</td>
+																<td>Jiunn-Liang Guo, Jhih-En Peng, Hei-Chia Wang*</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Cybernetics and Systems
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2013-03</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>An Event-Based Mobile Advertising Service Model Consolidating Decoupled Services</td>
+																<td>Hei-Chia Wang*, Che-Tsung Yang </td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					International Journal of Engineering Sciences & Emerging Technologies
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2013-02</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Constructing a Water Quality 2.0 OLAP System in Taiwan</td>
+																<td>Hei-Chia Wang*, Jiunn-Liang Guo</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Journal of Cleaner Production
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2013-  </td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Design and usability testing of a learning and plagiarism avoidance tutorial system for paraphrasing and citing in English: A case study</td>
+																<td>Gi-Zen Liu*, Hsiang-Yee Lo, Hei-Chia Wang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Computers & Education
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2012-09</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Semantic-based knowledge management for biological research</td>
+																<td>Tian-Hsiang Huang and Hei-Chia Wang*</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Asia Pacific Management Review
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2012-01</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>An Enhanced Case-based Reasoning Model for Supporting Inference Missing Attribute and Its Feature Weight</td>
+																<td>Hei-Chia Wang and Tian-Hsiang Huang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Journal of Internet Technology 
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2011-11</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>A core journal decision model based on weighted pagerank</td>
+																<td>Hei-Chia Wang, Ya-lin Chou, Jiunn-Liang Guo </td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Program: Electronic library and information systems
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2011-11</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Personalized e-learning environment for bioinformatics</td>
+																<td>Hei Chia Wang &amp; Tian Hsiang Huang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Interactive Learning Environments
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2011-11</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Semantic-based knowledge management for biological research</td>
+																<td>Tian-Hsiang Huang &amp; Hei Chia Wang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Asia Pacific Management Review
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2011-10</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Assessing e-learning 2.0 system success</td>
+																<td>Hei-Chia Wang and Yi-Fang Chiu</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Computers and Education
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2011-10</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Inference of transcriptional regulatory network by bootstrapping patterns</td>
+																<td>Hei-Chia Wang, Yi-Hsiu Chen, Hung-Yu Kao, and Shaw-Jenq Tsai</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Bioinformatics
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2011-06</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Automatic Summarization based on Automatically-Induced Ontology</td>
+																<td>HEI-CHIA WANG*, TIAN-HSIANG HUANG AND CHIA-TZUNG LIU</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Intelligent Automation and Soft Computing
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2011-05</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Using Automatic Patterns to Extract Gene Regulation Relations for Network Construction</td>
+																<td>Y. T. Tang, S. J. Li, H. Y. Kao, S. J. Tsai, and H. C. Wang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					 PLoS One
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2009-05</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Journal Article Topic Detection Based on Semantic</td>
+																<td>Hei-Chia Wang, Tian-Hsiang Huang, Jiunn-Liang Guo, and Shu-Chuan Li</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Lecture Note in Artificial Intelligent
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2009-04</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Prediction of EST Functional Relationships via Literature Mining with User-Specified Parameters</td>
+																<td>Hei-Chia Wang, Tian-Hsiang Huang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					IEEE Transactions on Biomedical Engineering
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2007-11</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>A Concept-Level Ontology Construction Method for Automatic Summarization</td>
+																<td>王惠嘉</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Journal of Internet Technology
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2007-10</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>PKR: a personalized knowledge recommendation system for virtual research communities</td>
+																<td>Hei-Chia Wang, Yu-Lun Chang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Journal of Computer Information Systems
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2007-05</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Performing a Course Material Enhancement Process with Asynchronous Interactive Online System</td>
+																<td>Hei-Chia Wang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Computers & Education
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2007-02</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Combining Subjective and Objective QoS Factors for Personalized Web Service Selection</td>
+																<td>Hei-Chia Wang*, Chang-Shing Lee, Tsung-Hsien Ho</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Expert Systems with Applications
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2006-07</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Comparison of transcripts in Phalaenopsis bellinaand Phalaenopsis equestris(Orchidaceae) flowers to deduce monoterpene biosynthesis pathway</td>
+																<td>Yu-Yun Hsiao, Wen-Chieh Tsai, Chang-Sheng Kuoh, Tian-Hsiang Huang, Hei-Chia Wang, Yann-Lii Leu, Tian</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					BMC Plant Biology
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2006-05</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Teaching-Material Design Center: an ontology-based system for customizing reusable e-materials</td>
+																<td>Hei Chia Wang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Computers & Education
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2006-03</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Expression analysis of the ESTs derived from the flower buds of Phalaenopsis equestris</td>
+																<td>Wen-Chieh Tsai, Yu-Yun Hsiao, Shu-Hua Lee, Chun-Wei Tung, Dan-Ping Wang, Huei-Chia Wang, Wen-Huei Ch</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Plant Science
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2005-11</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>A Practical E-learning System for an Object-Oriented System Analysis and Design course</td>
+																<td>Hei-Chia Wang*, Tsz-Chuen Wang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Journal of Internet Technology
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2005-11</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Gene Network Prediction from Microarray data by Association Rule and Dynamic Bayesian Network</td>
+																<td>Hei Chia Wang*, Yi-Shiun Lee</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Lecture Notes in Computer Science
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2005-07</td>
+																<td>
+																	
+																		
+																		
+																		專書論文
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Ontology-based Fuzzy Decision Agent and Its Application to Meeting Scheduling Support System</td>
+																<td>Chang-Shing Lee*, Hei-Chia Wang, and Meng-Ju Chang</td>
+																<td>
+																	
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2005-05</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>A Hybrid Expert System for Equipment Failure Analysis</td>
+																<td>Hei-Chia Wang, Huei-Sen Wang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Expert Systems with Applications
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2005-05</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Mathematical Model with Simulation to Find the Best Batch Size for Supply Chain Management</td>
+																<td>Hei-Chia Wang* and Yi-Sen Chen</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Journal of the Chinese Institute of Industrial Engineers
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2005-04</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>KSPF: using gene sequence patterns and data mining for biological knowledge management</td>
+																<td>Hei-Chia Wang*, Hung-Chih Kuo, Hong-Hwa Chen, Yu-Yun Hsiao, Wen-Chieh Tsai</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Expert Systems with Applications
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2004-12</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>網路服務整合機制</td>
+																<td>王惠嘉</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																					中華民國資訊學會通訊
+																				
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2004---</td>
+																<td>
+																	
+																		
+																		
+																		
+																		研討會論文
+																		
+																		
+																		
+																	
+																</td>
+																<td>採Local view的方法來整合同領域之Ontology</td>
+																<td>王惠嘉*, 莊泉輝</td>
+																<td>
+																	
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2003-07</td>
+																<td>
+																	
+																		
+																		
+																		
+																		研討會論文
+																		
+																		
+																		
+																	
+																</td>
+																<td>個人化顯隱性知識推薦方法之研究</td>
+																<td>王惠嘉</td>
+																<td>
+																	
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>2002-09</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Using Component Knowledge Base -- a framework for building an electrical service system with reusable components</td>
+																<td>Hei-Chia Wang</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Asia Pacific Management Review
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+															<tr>
+																<td>1998---</td>
+																<td>
+																	
+																		期刊論文
+																		
+																		
+																		
+																		
+																		
+																		
+																	
+																</td>
+																<td>Business-Object Semantics Communication Model in Distributed Environment</td>
+																<td>Hei Chia Wang*,  V. Karakostas</td>
+																<td>
+																	
+																		
+																			
+																				
+																				
+																				
+																					Lecture Notes in Computer Science
+																				
+																				
+																			
+																		
+																		
+																		
+																		
+																	
+																</td>
+															</tr>
+														
+													</table>
+												</div>
+											
+										
+                               		
+                                    
+                                
+							</div>
+						</div>
+					</div></td>
+			</tr>
+		</table>
+		
+
+
+
+
+<div id="zone.footer">
+	<!--footer Start-->
+	<div class="footer" style="background-image:none;">
+		<!--div class="logo"></div-->
+		<div class="copyright">
+			<span></span><span style="color:#4a4a4a;"></span>
+			<ul>
+				<li><a href="" target="_blank">隱私權宣告</a></li>
+				<li><a href="" target="_blank">版權宣告</a></li>
+				<li><a href="" target="_blank">資訊安全政策</a></li>
+			</ul>
+		</div>
+		<p>
+			 / 電話: / 傳真: /
+			資訊客服專線:<br />
+			上班時間: 建議瀏覽解析度 1024 x 768
+		</p>
+	</div>
+</div>
+	</div>
+</body>
+</html>

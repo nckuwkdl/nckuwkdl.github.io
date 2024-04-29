@@ -1,0 +1,1412 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Author: HiBootstrap Theme, Category: IT, Multipurpose, HTML, SASS" />
+
+    <!-- title -->
+    <title>Web Knowledge Discovery Lab</title>
+
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <!-- fontawesome CSS -->
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+    <!-- envy icon CSS -->
+    <link rel="stylesheet" href="assets/css/envyicon.min.css" />
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="assets/css/animate.min.css" />
+    <!-- magnific popup CSS -->
+    <link rel="stylesheet" href="assets/css/magnific-popup.min.css" />
+    <!-- owl-carousel CSS -->
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
+    <!-- meanmenu CSS -->
+    <link rel="stylesheet" href="assets/css/meanmenu.min.css" />
+    <!-- main style CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- responsive CSS -->
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+
+    <!-- favicon -->
+    <link rel="icon" href="assets/img/logos/wkdl_favicon.png" type="image/png" sizes="16x16" />
+    <!-- jQuery Google CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#footer").load("footer.html");
+        });
+    </script>
+
+    <style>
+        .landscape {
+            overflow: hidden;
+            width: 13vw;
+            height: 13vw;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .landscape>img {
+            width: 100%;
+            position: absolute;
+            /* left: -50%; */
+        }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TB03FG48PF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-TB03FG48PF');
+        gtag('event', 'alumni');
+
+    </script>
+</head>
+
+<body>
+    <!-- Start header Area -->
+    <header class="navbar-area nav-style-two">
+        <!-- menu for mobile device -->
+        <div class="mobile-nav">
+            <a href="index.html" class="logo">
+                <img src="assets/img/logos/wkdl_logo_light.png" alt="logo_light" />
+                <img src="assets/img/logos/wkdl_logo_dark.png" alt="logo-dark" />
+            </a>
+        </div>
+        <!-- Menu for desktop device-->
+        <div class="main-nav">
+            <nav class="navbar navbar-expand-md navbar-light">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="assets/img/logos/wkdl_logo_light.png" alt="logo_light" />
+                        <img src="assets/img/logos/wkdl_logo_dark.png" alt="logo-dark" />
+                    </a>
+                    <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="supervisor.html" class="nav-link">Supervisor</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="members.html" class="nav-link ">Members</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="alumni.html"" class=" nav-link active">Alumni</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="publications.html" class="nav-link">Publications</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="projects.html" class="nav-link">Projects</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="coming-soon.html" class="nav-link">contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- end header area -->
+
+    <!-- start page title area-->
+    <div class="page-title-area">
+        <div class="container">
+            <div class="page-title-content">
+                <h1>Alumni</h1>
+                <ul>
+                    <li class="item"><a href="index.html">Home</a></li>
+                    <li class="item"><a href="alumni.html">Alumni</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="shape">
+            <span class="shape1"></span>
+            <span class="shape2"></span>
+            <span class="shape3"></span>
+            <span class="shape4"></span>
+        </div>
+    </div>
+    <!-- end page title area -->
+    <section class="team-section pt-100 pb-70">
+        <div class="section-title">
+            <h2>Graduates Students</h2>
+            <p>
+                Its current graduates students include: PhD alumni, Master and Executive Master Program alumni.
+            </p>
+        </div>
+        <div class="container">
+
+            <div class="section-title">
+                <h2></h2>
+            </div>
+
+            <div class="row">
+            </div>
+        </div>
+        </div>
+        <!-- start team section-->
+        <div id="alumni_table">
+        </div>
+        <script>
+            function createCard(itemData) {
+                var itemTemplate = [
+                    '<div class="col-lg-3 col-md-4 col-sm-6">',
+                    '<div class="team-item">',
+                    '<div class="team-image">',
+                    '<img src=\"assets/img/alumni/' + itemData.img + '\.jpg" alt="team-member"></div>',
+                    '<div class="team-content"><h5><a href="#">',
+                    itemData.name,
+                    '</a></h5>',
+                    '<p class="mb-2">',
+                    itemData.company,
+                    '</p>',
+                    '<div class="social-link">',
+                    '<div><span class="department_alias">',
+                    itemData.grade,
+                    '</span></div>',
+                    '<div><span class="research_direction">',
+                    itemData.year,
+                    '</span></div>',
+                    '<div>',
+                    // '<a href="' + itemData.email + '" class="bg-tertiary" target="_blank"><i class="fab fa-facebook-f"></i></a>',
+                    // '<a href="' + itemData.email + '" class="bg-tertiary" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>',
+                    itemData.email,
+                    itemData.thesis,
+                    itemData.fb,
+                    // '<a href="' + itemData.thesis + '" class="bg-tertiary" target="_blank"><i class="fas fa-book"></i></a>',
+                    '</div></div></div></div></div>'
+                ];
+                return $(itemTemplate.join(''));
+            }
+
+            var data_eg = [
+                { "img": "master-劉弘裕", "name": "劉弘裕", "company": "AAA", "year": "108", "email": "text generation", "Url": 'eee', 'Email': 'eee' },
+            ];
+            var table_data = "";
+            var alumniAry = [];
+            var cards = $();
+
+            $.ajax({
+                type: "GET",
+                url: "assets/data/alumni.csv",
+                dataType: "text",
+                async: false, //async
+                success: function (data) {
+                    var data_lines = data.split(/\r?\n|\r/);
+                    for (var count = 0; count < data_lines.length; count++) {
+                        // console.log(data);
+                        cellData = data_lines[count].split(",");
+                        var tmpAlumni = {
+                            "grade": cellData[0], "year": cellData[1],
+                            "name": cellData[2], "company": cellData[3],
+                        }
+                        // console.log(tmpAlumni)
+                        // console.log(cellData[7])
+                        // if (typeof cellData[7] === 'undefined') {
+                        //     // does not exist
+                        //     tmpAlumni["img"] = "team_1"
+                        // }
+                        // else {
+                        //     // does exist
+                        //     tmpAlumni["img"] = cellData[7]
+                        // }
+                        if (cellData[4]) {
+                            tmpAlumni["email"] = '<a href=mailto:"' + cellData[4] + '" class="bg-tertiary" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>'
+                        } else{
+                            tmpAlumni["email"] = '<a href=mailto:"' + '" class="bg-tertiary" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>'
+                        }
+                        if (cellData[5]){
+                            tmpAlumni["fb"] = '<a href=https://www.facebook.com/' + cellData[5] + ' class="bg-tertiary" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>'
+                        } else{
+                            tmpAlumni["fb"] = ""
+                        }
+                        if (cellData[7]) {
+                            tmpAlumni["img"] = cellData[7]
+                        } else {
+                            tmpAlumni["img"] = "team_wkdl"
+                        }
+
+                        if (cellData[6]) {
+                            tmpAlumni["thesis"] = '<a href="' + cellData[6] + '" class="bg-tertiary" target="_blank"><i class="fas fa-book"></i></a>'
+                        } else {
+                            tmpAlumni["thesis"] = ""
+                        }
+
+                        if (typeof tmpAlumni.name === 'undefined') {
+                            continue
+                        }
+                        console.log(tmpAlumni)
+                        // if (cellData[7].length < 3) {
+                        //     tmpAlumni["img"] = "team_1"
+                        // } else {
+                        //     tmpAlumni["img"] = cellData[7]
+                        // }
+
+                        alumniAry.push(tmpAlumni)
+                        // for (var cell_count = 0; cell_count < cellData.length; cell_count++) {
+                        // if (count === 0) {
+                        //     table_data += '<th>' + cell_data[cell_count] + '</th>';
+                        // }
+                        // table_data += data_lines[count] + "<br>"
+                        //     alumniAry.push(cellData[cell_count])
+                        // }
+
+                    }
+                    // console.log(alumniAry)
+
+
+
+
+
+
+
+                }
+            });
+            // console.log(alumniAry)
+            alumniAry.forEach(function (value, index, array) {
+                cards = cards.add(createCard(value));
+            });
+
+
+
+
+
+            $(function () {
+                $('.row').append(cards);
+            });
+
+            // console.log((alumniAry))
+            // console.log(alumniAry[2]);
+
+            // console.log(typeof(alumniAry))
+            // console.log(Object.prototype.toString.call(alumniAry))
+            // console.log(typeof(data))
+            // console.log(Object.prototype.toString.call(data))
+
+            // var a=[20,21,22,23,24];
+            // a.forEach(function (val, index) {
+            //     console.log('index=', index);
+            //     if (index == 2) {
+            //         return false;
+            //     }
+            //     console.log('val=', val);
+            // });
+
+
+            // alumniAry.forEach(function (val, index) {
+            //     console.log('index=', index);
+            //     if (index == 2) {
+            //         return false;
+            //     }
+            //     console.log('val=', val);
+            // });
+
+
+
+
+                        // data_eg.forEach(function (item, i) {
+            //     console.log(item)
+            //     for (var count = 0; count < 100; count++) {
+            //         cards = cards.add(createCard(item));
+            //     }
+            // });
+        </script>
+
+
+        <script>
+            // var csvData;
+            // var table_data = '<div class="container"><div class="section-title"><h2>Fresh Master Students</h2></div>'
+
+            // $(document).ready(function () {
+            //     $.ajax({
+            //         type: "GET",
+            //         url: "assets/data/alumni.csv",
+            //         dataType: "text",
+            //         success: function (data) {
+            //             var data_lines = data.split(/\r?\n|\r/);
+            //             for (var count = 0; count < data_lines.length; count++) {
+            //                 console.log(data);
+
+            //                 table_data += data_lines[count] + "<br>"
+
+            //             }
+
+
+
+
+            //         }
+            //     });
+
+            //     $.ajax({
+            //         type: "GET",
+            //         url: "assets/data/format.txt",
+            //         dataType: "text",
+            //         success: function (data) {
+            //             // var data_lines = data.split(/\r?\n|\r/);
+            //             // for (var count = 0; count < data_lines.length; count++) {
+            //             //     console.log(data);
+
+            //             //     table_data += data_lines[count] + "<br>"
+
+            //             // }
+
+
+
+
+            //         }
+            //     });
+
+            //     $.ajax({
+            //         success: function () {
+            //             table_data += ' </div></div>'
+            //             $('#alumni_table').html(table_data);
+            //         }
+            //     });
+            // });
+        </script>
+
+<!-- 
+
+        <center>
+            <div class="table table-bordered">
+                <table width="80%" border="0" cellspacing="12px">
+                    <tr>
+                        <td colspan="2" bgcolor="#131988">
+                            <font color="white">
+                                <center>歷屆學長姊</center>
+                            </font>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3" class="style1">博班</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <font face="標楷體">
+
+                                <a href="mailto:huangtx@gmail.com">黃天祥</a>
+                            </font>
+                        </td>
+                        <td>
+                            <font face="標楷體">
+
+                                bioinformatics/Text mining</font>
+                        </td>
+                        <td>
+                            　</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <a href="mailto:jiunnguo@yahoo.com">郭俊良</a>
+                        </td>
+                        <td>
+                            Topic Detection</td>
+                        <td>國防管理學院</td>
+                    </tr>
+
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <a href="mailto:r78981039@mail.ncku.edu.tw">楊哲綜</a>
+                        </td>
+                        <td>
+                            Fuzzy Support Vector Machine</td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <a href="mailto:momois87@hotmail.com">蔣昱弘</a>
+                        </td>
+                        <td>
+                            Flipped Learning</td>
+                        <td>資策會</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <a href="mailto:r78981039@mail.ncku.edu.tw">邱緯賓</a>
+                        </td>
+                        <td>
+                            Group Decision Method</td>
+                        <td></td>
+                    </tr>
+
+
+
+
+                </table>
+                <table width="80%" border="0">
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#bf9030">
+                        <td colSpan="3" height="17">109級</td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffab00">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffd173">
+                        <td>
+                            <a href="mailto:bluehat.lin@gmail.com">林彥廷</a>
+                        </td>
+                        <td>產品分析</td>
+                        <td>
+                            <font face="標楷體">
+                                台積電</font>
+                        </td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffd173">
+                        <td class="style1">
+                            <a href="mailto:fan8502@gmail.com">陳怡帆</a>
+                        </td>
+                        <td class="style1">題目生成</td>
+                        <td>台積電</td>
+                    </tr>
+                </table>
+
+                </table>
+                <table width="80%" border="0">
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#bf9030">
+                        <td colSpan="3" height="17">109級在職班</td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffab00">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffd173">
+                        <td>
+                            <a href="mailto:sueijieyang@gmail.com;">楊穗結</a>
+                        </td>
+                        <td>知識地圖</td>
+                        <td>
+                            <font face="標楷體">
+                            </font>
+                        </td>
+                    </tr>
+
+                </table>
+
+
+                <table width="80%" border="0">
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#bf9030">
+                        <td colSpan="3" height="17">108級</td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffab00">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffd173">
+                        <td>
+                            <a href="mailto:jwc911037@gmail.com;">鄭人瑋</a>
+                        </td>
+                        <td>引用選定</td>
+                        <td>
+                            <font face="標楷體">
+
+                                台積電</font>
+                        </td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffd173">
+                        <td class="style1">
+                            <a href="mailto:ericshe21110@gmail.com;">徐尚煒</a>
+                        </td>
+                        <td class="style1">Game Chatbot</td>
+                        <td></td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffd173">
+                        <td>
+                            <a href="mailto:feather8405@gmail.com;">徐陞瑋</a>
+                        </td>
+                        <td>Music
+                            recommendation</td>
+                        <td>　</td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffd173">
+                        <td>
+                            <a href="mailto:s1024625@mail.ncyu.edu.tw;">李亭葦</a>
+                        </td>
+                        <td>News
+                            summarization</td>
+                        <td>　</td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffd173">
+                        <td>
+                            <a href="mailto:come0811@icloud.com;">趙雅蘭</a>
+                        </td>
+                        <td>E-leraning</td>
+                        <td>　</td>
+                    </tr>
+
+
+
+                </table>
+
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">108級在職班</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+
+
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <a href="mailto:kelly1027@gmail.com;">鄒欣怡</a>
+                        </td>
+                        <td>Issue Tracker</td>
+                        <td>　</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <a href="mailto:richardroe.chen@gmail.com;">陳正煌</a>
+                        </td>
+                        <td>QA系統</td>
+                        <td>　</td>
+                    </tr>
+
+                </table>
+
+                <table width="80%" border="0">
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#bf9030">
+                        <td colSpan="3" height="17">107級</td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffab00">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffd173">
+                        <td style="FONT: 14px 標楷體"><a href="mailto:smilywhysoserious@gmail.com">張生翰</a></td>
+                        <td>文本生成</td>
+                        <td>　</td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffd173">
+                        <td style="FONT: 14px 標楷體"><a href="mailto:knight6623@kimo.com">許子庭</a></td>
+                        <td>文本分析</td>
+                        <td></td>
+                    </tr>
+                    <tr style="FONT: 14px 標楷體" align="center" bgColor="#ffd173">
+                        <td style="FONT: 14px 標楷體"><a href="mailto:lucylin0819@gmail.com">林真瑜</a></td>
+                        <td>文件歸納</td>
+                        <td>台達電</td>
+                    </tr>
+
+                </table>
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">106級在職班</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+
+
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:ken45124@gmail.com">陳俊傑</a></td>
+                        <td>以時間序列社群文字分析建構災情通報預警之研究
+                        </td>
+                        <td>台南市政府</td>
+                    </tr>
+                </table>
+
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">106級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+
+
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:ken45124@gmail.com">陳琮翰</a></td>
+                        <td>結合文字探勘與金融指標之匯率預測模型
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:weifen0629@gmail.com">黃薇芬</a></td>
+                        <td>
+                            改善實體識別與特徵擷取之評論摘要方法
+                        </td>
+                        <td>台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:ko8722375@gmail.com">劉如祥</a></td>
+                        <td>新聞與市資料預測股價波動
+                        </td>
+                        <td>大立光</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:windd100@gmail.com">朱峻宏</a></td>
+                        <td>運用文字探勘於旅遊部落格意見領袖辨識方法
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:l63045@yahoo.com.tw">林思婷</a></td>
+                        <td>社群問答網站答案品質分析
+                        </td>
+                        <td></td>
+                    </tr>
+
+                </table>
+
+
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">105級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+
+
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:irenehuang224@gmail.com">蔡育姍</a></td>
+                        <td>Yelp的特徵分析</td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:siou0827@gmail.com;">黃琬玲</a></td>
+                        <td>
+                            商用網站的物品推薦</td>
+                        <td>台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:m810217@yahoo.com.tw;">王貞凰</a></td>
+                        <td>旅遊推薦</td>
+                        <td>工研院</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:rusadoh@gmail.com">陳鈺玟</a></td>
+                        <td>評價分析方法</td>
+                        <td>台積電</td>
+                    </tr>
+                </table>
+
+
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">104級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+
+
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:irenehuang224@gmail.com">孫義峰</a></td>
+                        <td>中文線上顧客旅館評論之特徵擷取
+                        </td>
+                        <td>中華電信</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:%20fresh08man@gmail.com;">程彥輔</a>
+                        </td>
+                        <td>網路優惠資訊之自動化擷取
+                        </td>
+                        <td>和順汽車</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:freedy@gmail.com">林沛昕</a></td>
+                        <td>藉由協同過濾與標籤機制之音樂推薦
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:freedy@gmail.com">夏平倫</a></td>
+                        <td>以文字探勘方法建構之專利地圖探測新穎技術機會之研究
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+
+
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">103級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+
+
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:irenehuang224@gmail.com">黃品瑞</a></td>
+                        <td>食記推薦</td>
+                        <td>
+                            台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:%20fresh08man@gmail.com;">黃靖傑</a>
+                        </td>
+                        <td>
+                            twitter主題偵測</td>
+                        <td>LIORS</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:freedy@gmail.com">黃俊達</a></td>
+                        <td>趨勢發現</td>
+                        <td>成大計中</td>
+                    </tr>
+                </table>
+
+
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">102級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:satb1077@hotmail.com">謝佳穎</a></td>
+                        <td>線上拍賣價格、評價與互動資訊對購買意圖的影響
+                        </td>
+                        <td>
+                            　</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:yichia168@gmail.com">江益嘉</a></td>
+                        <td>
+                            自動化專利科技主題地圖之建構方法
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td style="font:14px 標楷體"><a href="mailto:sp033730@gmail.com">張薰云</a></td>
+                        <td>改善中文產品特徵擷取於商品評價之研究定
+                        </td>
+                        <td>台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:s95213008@ncnu.edu.tw">邱哲夫</a></td>
+                        <td>動態決定群數之分割式分群系統定
+                        </td>
+                        <td>
+                            <font face="標楷體">
+
+                            </font>
+                        </td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <a href="mailto:windy00316@hotmail.com">丁鈺純</a>
+                        </td>
+                        <td>
+                            英中跨語言資訊檢索系統的建立
+                        </td>
+                        <td>
+                            　</td>
+                    </tr>
+                </table>
+                <br>
+                </font>
+
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">101級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <a href="mailto:s0934487@mail.ncyu.edu.tw">王京盛</a>
+                        </td>
+                        <td>
+                            考量語意及引用分析之研究主題趨勢分析方法 </td>
+                        <td>美國芝加哥</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <a href="mailto:pumalala1215@yahoo.com.tw">林柏安</a>
+                        </td>
+                        <td>
+                            混合式學術會議資訊分類法 </td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <a href="mailto:wingsflyup@hotmail.com">程毓軒</a>
+                        </td>
+                        <td>
+                            運用社群資訊於個人化之微網誌推薦
+                        </td>
+                        <td>資策會</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <a href="mailto:wllm.pao@gmail.com">黃彥慈</a>
+                        </td>
+                        <td>
+                            考量社群資訊建構研究主題地圖之方法
+                        </td>
+                        <td>
+                            　</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>
+                            <a href="mailto:ng_chi_wa@hotmail.com">蘇嘉穎</a>
+                        </td>
+                        <td>
+                            利用語法結構與語意相似度建立改寫句子抄襲偵測方法
+                        </td>
+                        <td>
+                            澳門</td>
+                    </tr>
+                </table>
+                <br>
+
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">100級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:add115104@hotmail.com">李秋嬋</a></td>
+                        <td>互動式e-learning</td>
+                        <td>奇美電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:hcwclover0911@hotmail.com">何承威</a></td>
+                        <td>Medical Informatics</td>
+                        <td>
+                            台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:fun387@gmail.com">吳穗池</a></td>
+                        <td>Web Service選擇</td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:maxim7667@hotmail.com">陳宥輔</a></td>
+                        <td>Web Service 分類</td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:david2300409@hotmail.com">顏以豪</a></td>
+                        <td>個人化推薦</td>
+                        <td>
+                            台積電</td>
+                    </tr>
+                </table>
+
+                <br />
+
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">99級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:s0934487@mail.ncyu.edu.tw">林宜瑩</a></td>
+                        <td>利用Gene Ontology進行基因分群</td>
+                        <td>台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:pumalala1215@yahoo.com.tw">謝依蓉</a></td>
+                        <td>E-Learning方法評估</td>
+                        <td>台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:wingsflyup@hotmail.com">賴銘偉</a></td>
+                        <td>Feature Selection
+                            應用於文件重要性評估</td>
+                        <td>
+                            台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:wllm.pao@gmail.com">包志輝</a></td>
+                        <td>Service Orient Architecture應用評估與建立
+                        </td>
+                        <td>台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:ng_chi_wa@hotmail.com">吳子華</a></td>
+                        <td>Q & A 系統</td>
+                        <td>台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:s0934487@mail.ncyu.edu.tw">王丹汝</a></td>
+                        <td></td>
+                        <td>台積電</td>
+                    </tr>
+                </table>
+                <br />
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">98級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:B9109016@mail.ntust.edu.tw">邱怡芳</a></td>
+                        <td>利用Gene Ontology進行基因分群</td>
+                        <td>台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:dream00501@gmail.com">陳怡秀</a></td>
+                        <td>E-Learning方法評估</td>
+                        <td>台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:temforward@gmail.com">彭志恩</a></td>
+                        <td>Feature Selection
+                            應用於文件重要性評估</td>
+                        <td>台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:r7697410@mail.ncku.edu.tw">鍾伊甄</a></td>
+                        <td>Service Orient Architecture應用評估與建立
+                        </td>
+                        <td>台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:B9109016@mail.ntust.edu.tw">蘇信州</a></td>
+                        <td></td>
+                        <td>瀚宇彩晶</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:dream00501@gmail.com">劉姿蘭</a></td>
+                        <td></td>
+                        <td>奇美醫院</td>
+                    </tr>
+                </table>
+                <br />
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">97級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:B9109043@mail.ntust.edu.tw">呂文蓁</a></td>
+                        <td>
+                            新聞文件最適分層分類法研究 </td>
+                        <td>中華電信研究所</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:garfisnoopy@gmail.com">龐景云</a></td>
+                        <td>
+                            學術研究成果之模式分析系統 </td>
+                        <td>中華電信研究所</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:chienchinlee@gmail.com">李建慶</a></td>
+                        <td>Gene Clustering</td>
+                        <td>台積電</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:jinkuso@gmail.com">吳偉銘</a></td>
+                        <td>
+                            利用主題偵測分析期刊於不同時間之內容趨勢 </td>
+                        <td>工研院</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:dokingtw@gmail.com">桂卓慶</a></td>
+                        <td>Text Pattern Recognition</td>
+                        <td>合勤科技</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:dokingtw@gmail.com">張永章</a></td>
+                        <td></td>
+                        <td>資策會</td>
+                    </tr>
+                </table>
+                <br />
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">96級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:french127@gmail.com">李淑娟</a></td>
+                        <td>文件分類</td>
+                        <td>合勤科技</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:s9044122@hotmail.com">周雅鈴</a></td>
+                        <td>數位圖書館</td>
+                        <td>中華電信研究所</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:R7694123@gmail.com">楊曜瑋</a></td>
+                        <td>Gene Interaction</td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:LittleQooo@hotmail.com">徐振議</a></td>
+                        <td>
+                            以演化分析為基礎之蛋白質超家族序列分群演算法之建立
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:cocokellykimo@yahoo.com.tw">劉佳宗</a></td>
+                        <td>Text Summary for e-learning</td>
+                        <td>合勤科技</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:cocokellykimo@yahoo.com.tw">黃建彰</a></td>
+                        <td></td>
+                        <td>台電</td>
+                    </tr>
+                </table>
+                <br />
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">95級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>林育甫</td>
+                        <td>Pathway prediction</td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:marc.ms89@gmail.com">陳彥勳</a></td>
+                        <td>Semantic Text Mining</td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>曾馨稹</td>
+                        <td>Feature Selection</td>
+                        <td></td>
+                    </tr>
+                </table>
+                <br />
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">94級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:rog@iis.sinica.edu.tw">李宜勳</a></td>
+                        <td>
+                            整合異質性資料以預測基因網路
+                        </td>
+                        <td>中央研究院</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:mikefoxgo@yahoo.com.tw">何宗憲</a></td>
+                        <td>
+                            以服務品質為基礎之網路服務選擇
+                        </td>
+                        <td>凌群資訊</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:dp882@pchome.com.tw">吳昭儒</a></td>
+                        <td>
+                            自動化網路服務流程組合</td>
+                        <td>中國人壽</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:u8213021@yahoo.com.tw">林宗達</a></td>
+                        <td>利用文獻探勘預測 ESTs
+                            (工力)能相關性</td>
+                        <td>凌群資訊</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:hanhsi@alumni.ccu.edu.tw">陳函希</a></td>
+                        <td>
+                            建置團隊導向及個人化之加值型資料庫
+                        </td>
+                        <td>中華電信</td>
+                    </tr>
+                </table>
+                <br />
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">93級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>王姿淳</td>
+                        <td>Software Development meta-Experience Maintenance and Retrieval</td>
+                        <td>中信銀</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>洪煌龍</td>
+                        <td>
+                            資料探勘在社區大樓電信服務市場之應用
+                        </td>
+                        <td>中華電信</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>&#35377;&#20521;&#29771;</td>
+                        <td>含semantic metadata
+                            之數位教材整合與重用</td>
+                        <td>教育學程</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:Iam.mark@hotmail.com">莊泉輝</a></td>
+                        <td>Local-view Oriented Ontology Integration</td>
+                        <td>凌群資訊</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:jovey@alumni.ccu.edu.tw">曾朝鴻</a></td>
+                        <td>
+                            結合比對過濾機制之蛋白質序列分群方法
+                        </td>
+                        <td>凌群資訊</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:leterboy@gmail.com">鄭義信</a></td>
+                        <td>
+                            以階層關係及浮動權重之案例式推理模式建構
+                        </td>
+                        <td>工研院</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:leterboy@gmail.com">洪煌龍</a></td>
+                        <td></td>
+                        <td>中華電信</td>
+                    </tr>
+                </table>
+                <br />
+                <table width="80%" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">92級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:apswang@hotmail.com">王永宏</a></td>
+                        <td>
+                            運用遺傳演算法求解供應鏈產銷整合問題
+                        </td>
+                        <td>奇美電子</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:chrischen0301@hotmail.com">陳怡聖</a></td>
+                        <td>
+                            供應鏈系統之生產與採購批量最佳化研究
+                        </td>
+                        <td>中衛發展中心</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:frankie.kuo@gmail.com">&#37101;&#24344;&#24535;</a></td>
+                        <td>
+                            應用資料挖掘技術推論未知
+                            PLTP 序列相關文獻</td>
+                        <td>眾智國際</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td>張毓倫</td>
+                        <td>
+                            個人化顯隱性知識推薦方法之研究
+                        </td>
+                        <td>大同資訊</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:jayang843@gmail.com">楊凱傑</a></td>
+                        <td>
+                            以本體論為基礎的可重用軟體元件搜尋方法之研究
+                        </td>
+                        <td>凌群資訊</td>
+                    </tr>
+                </table>
+                <br />
+                <table width="80%x" border="0">
+                    <tr bgcolor="#BF9030" align="center" style="font:14px 標楷體">
+                        <td colspan="3">91級</td>
+                    </tr>
+                    <tr bgcolor="#FFAB00" align="center" style="font:14px 標楷體">
+                        <td width="23%">姓名</td>
+                        <td width="50%">論文著作或研討會</td>
+                        <td>服務機關</td>
+                    </tr>
+                    <tr align="center" style="font:14px 標楷體" bgcolor="#FFD173">
+                        <td><a href="mailto:r7689103@hotmail.com">陳奕志</a></td>
+                        <td>
+                            醫療eCRM元件評量模式與架構之研究
+                        </td>
+                        <td>資策會</td>
+                    </tr>
+                </table>
+            </div>
+        </center> -->
+        <!-- end team section -->
+
+        <!-- start footer area -->
+        <!-- <footer class="footer-area pt-100 pb-70 bg-thin">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-5 col-sm-6 col-12">
+                        <div class="footer-widget">
+                            <div class="navbar-brand">
+                                <a href="index.html">
+                                    <img src="assets/img/logos/logo_dark.png" alt="image" />
+                                </a>
+                            </div>
+                            <p>Grursus mal suada faci Lorem to the ipsum dolarorit more ame tion more consectetu.</p>
+                            <div class="social-link">
+                                <a href="#" class="bg-tertiary" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="bg-success" target="_blank"><i class="fab fa-tumblr"></i></a>
+                                <a href="#" class="bg-danger" target="_blank"><i class="fab fa-youtube"></i></a>
+                                <a href="#" class="bg-info" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="bg-pink" target="_blank"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-5 col-sm-6 col-12">
+                        <div class="footer-widget">
+                            <h5>Our Services</h5>
+                            <ul class="footer-quick-links">
+                                <li><a href="service-details.html">Interface Design</a></li>
+                                <li><a href="service-details.html">SEO Optimizer</a></li>
+                                <li><a href="service-details.html">Digital Marketing</a></li>
+                                <li><a href="service-details.html">Market Monitor</a></li>
+                                <li><a href="service-details.html">Graphic Design</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-5 col-sm-6 col-12">
+                        <div class="footer-widget">
+                            <h5>Other Resources</h5>
+                            <ul class="footer-quick-links">
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="pricing.html">Pricing</a></li>
+                                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                                <li><a href="services.html">Services</a></li>
+                                <li><a href="contact.html">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-5 col-sm-6 col-12">
+                        <div class="footer-widget">
+                            <h5>Contact info</h5>
+                            <div class="contact-info">
+                                <i class="envy envy-pin"></i>
+                                <p>113 Solit, White House, New Jersey, USA</p>
+                            </div>
+                            <div class="contact-info">
+                                <i class="envy envy-call"></i>
+                                <p>
+                                    <a href="tel:+001-548-159-2491">+001-548-159-2491</a>
+                                </p>
+                                <br>
+                                <p>
+                                    <a href="tel:+001-548-159-2492">+001-548-159-2492</a>
+                                </p>
+                            </div>
+                            <div class="contact-info">
+                                <i class="envy envy-plane"></i>
+                                <p>
+                                    <a href="mailTo:hello@solit.com">hello@solit.com</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer> -->
+        <!-- end footer area -->
+
+        <!-- start copy right area -->
+        <!-- <div class="copy-right-area">
+            <div class="container">
+                <div class="copy-right-content">
+                    <p>
+                        Copyright @2020 Solit. Designed By
+                        <a href="https://hibootstrap.com/" target="_blank">
+                            HiBootstrap.com
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div> -->
+        <!-- end copy right area-->
+        <div id="footer">This is footer and copyright</div>
+
+        <!-- jequery JS -->
+        <script src="assets/js/jquery.min.js"></script>
+        <!-- bootstrap JS -->
+        <script src="assets/js/bootstrap.min.js"></script>
+        <!-- popper JS -->
+        <script src="assets/js/popper.min.js"></script>
+        <!-- magnific popup JS -->
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <!-- owl carousel JS -->
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <!-- meanmenu JS -->
+        <script src="assets/js/meanmenu.min.js"></script>
+        <!-- form validator -->
+        <script src="assets/js/form-validator.min.js"></script>
+        <!-- contact form JS -->
+        <script src="assets/js/contact-form-script.js"></script>
+        <!-- ajaxchimp JS -->
+        <script src="assets/js/jquery.ajaxchimp.min.js"></script>
+        <!-- main JS -->
+        <script src="assets/js/main.js"></script>
+</body>
+
+</html>

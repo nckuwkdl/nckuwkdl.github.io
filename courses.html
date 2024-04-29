@@ -1,0 +1,801 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<!-- ref:https://www.sliderrevolution.com/resources/css-timeline/ -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Author: HiBootstrap Theme, Category: IT, Multipurpose, HTML, SASS" />
+
+    <!-- title -->
+    <title>Web Knowledge Discovery Lab</title>
+
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <!-- fontawesome CSS -->
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+    <!-- envy icon CSS -->
+    <link rel="stylesheet" href="assets/css/envyicon.min.css" />
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="assets/css/animate.min.css" />
+    <!-- magnific popup CSS -->
+    <link rel="stylesheet" href="assets/css/magnific-popup.min.css" />
+    <!-- owl-carousel CSS -->
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
+    <!-- meanmenu CSS -->
+    <link rel="stylesheet" href="assets/css/meanmenu.min.css" />
+    <!-- main style CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- responsive CSS -->
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+
+    <!-- favicon -->
+    <link rel="icon" href="assets/img/logos/wkdl_favicon.png" type="image/png" sizes="16x16" />
+    <!-- jQuery Google CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#footer").load("footer.html");
+        });
+    </script>
+    <style>
+        .circular--div {
+            width: 200px;
+            height: 200px;
+            background-image: url('assets/img/professor/professor_1.jpg');
+            background-size: cover;
+            display: block;
+            border-radius: 100px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+        }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TB03FG48PF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-TB03FG48PF');
+    </script>
+
+    <style>
+        /*
+!!!!
+This pen is being refactored
+!!!!
+*/
+
+        /*
+=====
+DEPENDENCES
+=====
+*/
+
+        .r-title {
+            margin-top: var(--rTitleMarginTop, 0) !important;
+            margin-bottom: var(--rTitleMarginBottom, 0) !important;
+        }
+
+
+        p:not([class]) {
+            line-height: var(--cssTypographyLineHeight, 1.78);
+            margin-top: var(--cssTypographyBasicMargin, 1em);
+            margin-bottom: 0;
+        }
+
+        p:not([class]):first-child {
+            margin-top: 0;
+        }
+
+        /*
+text component
+*/
+
+        .text {
+            display: var(--textDisplay, inline-flex);
+            font-size: var(--textFontSize, 1rem);
+        }
+
+        /*
+time component
+*/
+
+        /*
+core styles
+*/
+
+        .time {
+            display: var(--timeDisplay, inline-flex);
+        }
+
+        /*
+extensions
+*/
+
+        .time__month {
+            margin-left: var(--timelineMounthMarginLeft, .25em);
+        }
+
+        /*
+skin
+*/
+
+        .time {
+            padding: var(--timePadding, .25rem 1.25rem .25rem);
+            background-color: var(--timeBackgroundColor, #f0f0f0);
+
+            font-size: var(--timeFontSize, .75rem);
+            font-weight: var(--timeFontWeight, 700);
+            text-transform: var(--timeTextTransform, uppercase);
+            color: var(--timeColor, currentColor);
+        }
+
+        /*
+card component
+*/
+
+        /*
+core styles
+*/
+
+        .card {
+            padding: var(--timelineCardPadding, 1.5rem 1.5rem 1.25rem);
+        }
+
+        .card__content {
+            margin-top: var(--cardContentMarginTop, .5rem);
+        }
+
+        /*
+skin
+*/
+
+        .card {
+            border-radius: var(--timelineCardBorderRadius, 2px);
+            border-left: var(--timelineCardBorderLeftWidth, 3px) solid var(--timelineCardBorderLeftColor, var(--uiTimelineMainColor));
+            box-shadow: var(--timelineCardBoxShadow, 0 1px 3px 0 rgba(0, 0, 0, .12), 0 1px 2px 0 rgba(0, 0, 0, .24));
+            background-color: var(--timelineCardBackgroundColor, #fff);
+        }
+
+        /*
+extensions
+*/
+
+        .card__title {
+            --rTitleMarginTop: var(--cardTitleMarginTop, 1rem);
+            font-size: var(--cardTitleFontSize, 1.25rem);
+        }
+
+        /*
+=====
+CORE STYLES
+=====
+*/
+
+        .timeline {
+            display: var(--timelineDisplay, grid);
+            grid-row-gap: var(--timelineGroupsGap, 2rem);
+        }
+
+        /*
+1. If timeline__year isn't displaed the gap between it and timeline__cards isn't displayed too
+*/
+
+        .timeline__year {
+            margin-bottom: 1.25rem;
+            /* 1 */
+        }
+
+        .timeline__cards {
+            display: var(--timeloneCardsDisplay, grid);
+            grid-row-gap: var(--timeloneCardsGap, 1.5rem);
+        }
+
+
+        /*
+=====
+SKIN
+=====
+*/
+
+        .timeline {
+            --uiTimelineMainColor: var(--timelineMainColor, #222);
+            --uiTimelineSecondaryColor: var(--timelineSecondaryColor, #fff);
+
+            border-left: var(--timelineLineWidth, 3px) solid var(--timelineLineBackgroundColor, var(--uiTimelineMainColor));
+            padding-top: 1rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .timeline__year {
+            --timePadding: var(--timelineYearPadding, .5rem 1.5rem);
+            --timeColor: var(--uiTimelineSecondaryColor);
+            --timeBackgroundColor: var(--uiTimelineMainColor);
+            --timeFontWeight: var(--timelineYearFontWeight, 400);
+        }
+
+        .timeline__card {
+            position: relative;
+            margin-left: var(--timelineCardLineGap, 1rem);
+        }
+
+        /*
+1. Stoping cut box shadow
+*/
+
+        .timeline__cards {
+            overflow: hidden;
+            padding-top: .25rem;
+            /* 1 */
+            padding-bottom: .25rem;
+            /* 1 */
+        }
+
+        .timeline__card::before {
+            content: "";
+            width: 100%;
+            height: var(--timelineCardLineWidth, 2px);
+            background-color: var(--timelineCardLineBackgroundColor, var(--uiTimelineMainColor));
+
+            position: absolute;
+            top: var(--timelineCardLineTop, 1rem);
+            left: -50%;
+            z-index: -1;
+        }
+
+        /*
+=====
+SETTINGS
+=====
+*/
+        /**/
+        .timeline {
+            --timelineMainColor: #4557bb;
+        }
+
+        /*
+=====
+DEMO
+=====
+*/
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Open Sans, Ubuntu, Fira Sans, Helvetica Neue, sans-serif;
+            color: #222;
+
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        .page {
+            max-width: 47rem;
+            padding: 5rem 2rem 3rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Start header Area -->
+    <header class="navbar-area nav-style-two">
+        <!-- menu for mobile device -->
+        <div class="mobile-nav">
+            <a href="index.html" class="logo">
+                <img src="assets/img/logos/wkdl_logo_light.png" alt="logo_light" />
+                <img src="assets/img/logos/wkdl_logo_dark.png" alt="logo-dark" />
+            </a>
+        </div>
+        <!-- Menu for desktop device-->
+        <div class="main-nav">
+            <nav class="navbar navbar-expand-md navbar-light">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="assets/img/logos/wkdl_logo_light.png" alt="logo_light" />
+                        <img src="assets/img/logos/wkdl_logo_dark.png" alt="logo-dark" />
+                    </a>
+                    <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="supervisor.html" class="nav-link ">Supervisor</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="members.html" class="nav-link">Members</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="alumni.html" class="nav-link">Alumni</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="published.html" class="nav-link">Published</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="projects.html" class="nav-link">Projects</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="courses.html" class="nav-link active">Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="mailto:hcwang@mail.ncku.edu.tw" class="nav-link">contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- end header area -->
+
+    <!-- start page title area-->
+    <div class="page-title-area bg-thin">
+        <div class="container">
+            <div class="page-title-content">
+                <h1>Courses</h1>
+                <ul>
+                    <li class="item"><a href="index.html">Home</a></li>
+                    <li class="item"><a href="supervisor.html">Courses</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="shape">
+            <span class="shape1"></span>
+            <span class="shape2"></span>
+            <span class="shape3"></span>
+            <span class="shape4"></span>
+        </div>
+    </div>
+    <!-- end page title area -->
+
+    <!-- Start Blog Details section -->
+    <section class="team-section pt-100 pb-70">
+
+        <div class="section-title">
+            <h2>Our Courses</h2>
+            <p>
+                Every winter and summer vacations have our courses. 
+            </p>
+        </div>
+        <div class="container">
+    </section>
+
+    <div class="page">
+        <div class="timeline">
+            <div class="timeline__group">
+                <span class="timeline__year time" aria-hidden="true">2021</span>
+                <div class="timeline__cards">
+                    <div class="timeline__card card">
+                        <header class="card__header">
+                            <time class="time" datetime="2021-02-01">
+                                <span class="time__day">01</span>
+                                <span class="time__month">Feb</span>
+                            </time>
+                            <h3 class="card__title r-title">Winter Program</h3>
+
+                        </header>
+                        <div class="card__content">
+                            <ul>
+                                <li>
+                                    <p>Frontend framework: React? Vue? Angular?</p>
+                                </li>
+                                <li>
+                                    <p>Web crawler: Selenium</p>
+                                </li>
+                                <li>
+                                    <p>Hadoop v.s Spark</p>
+                                </li>
+                                <li>
+                                    <p>Docker</p>
+                                </li>
+                                <li>
+                                    <p>Chatbot - Line</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="timeline__group">
+                <span class="timeline__year time" aria-hidden="true">2020</span>
+                <div class="timeline__cards">
+                    <div class="timeline__card card">
+                        <header class="card__header">
+                            <time class="time" datetime="2020-07-1">
+                                <span class="time__day">01</span>
+                                <span class="time__month">Jul</span>
+                            </time>
+                            <h3 class="card__title r-title">Summer Program</h3>
+
+                        </header>
+                        <div class="card__content">
+                            <ul>
+                                <li>
+                                    <p>Website and Database: php, mysql, html, css, xampp</p>
+                                </li>
+                                <li>
+                                    <p>VB6</p>
+                                </li>
+                                <li>
+                                    <p>Text mining concept:feature extraction, feature selection, ngram, data
+                                        preprocessing,
+                                        similarity measure, Information Retrival, Measure index, algorithm
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>Python</p>
+                                </li>
+                                <li>
+                                    <p>Neural Network</p>
+                                </li>
+                                <li>
+                                    <p>Natural Language Processing(NLP)</p>
+                                </li>
+                                <li>
+                                    <p>Linux</p>
+                                </li>
+                                <li>
+                                    <p>Latent Dirichlet Allocation(LDA)</p>
+                                </li>
+                                <li>
+                                    <p>JQuery</p>
+                                </li>
+                                <li>
+                                    <p>Git</p>
+                                </li>
+                                <li>
+                                    <p>Deep Learning</p>
+                                </li>
+                                <li>
+                                    <p>Django</p>
+                                </li>
+                                <li>
+                                    <p>Android</p>
+                                </li>
+                                <li>
+                                    <p>Electronic Resources and Endnote</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline__cards">
+                    <div class="timeline__card card">
+                        <header class="card__header">
+                            <time class="time" datetime="2020-02-01">
+                                <span class="time__day">01</span>
+                                <span class="time__month">Feb</span>
+                            </time>
+                            <h3 class="card__title r-title">Winter Program</h3>
+
+                        </header>
+                        <div class="card__content">
+                            <ul>
+                                <li>
+                                    <p>Wordnet</p>
+                                </li>
+                                <li>
+                                    <p>Web crawler: Selenium</p>
+                                </li>
+                                <li>
+                                    <p>NoSQL database: mongodb</p>
+                                </li>
+                                <li>
+                                    <p>BlockChain</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline__group">
+                <span class="timeline__year time" aria-hidden="true">2019</span>
+                <div class="timeline__cards">
+                    <div class="timeline__card card">
+                        <header class="card__header">
+                            <time class="time" datetime="2020-07-1">
+                                <span class="time__day">01</span>
+                                <span class="time__month">Jul</span>
+                            </time>
+                            <h3 class="card__title r-title">Summer Program</h3>
+
+                        </header>
+                        <div class="card__content">
+                            <ul>
+                                <li>
+                                    <p>PHP</p>
+                                </li>
+                                <li>
+                                    <p>VB6</p>
+                                </li>
+                                <li>
+                                    <p>Text mining concept</p>
+                                </li>
+                                <li>
+                                    <p>Python</p>
+                                </li>
+                                <li>
+                                    <p>Neural Network</p>
+                                </li>
+                                <li>
+                                    <p>Linux</p>
+                                </li>
+                                <li>
+                                    <p>Latent Dirichlet Allocation(LDA)</p>
+                                </li>
+                                <li>
+                                    <p>Keras</p>
+                                </li>
+                                <li>
+                                    <p>Git</p>
+                                </li>
+                                <li>
+                                    <p>Docker</p>
+                                </li>
+                                <li>
+                                    <p>Django</p>
+                                </li>
+                                <li>
+                                    <p>Android</p>
+                                </li>
+                                <li>
+                                    <p>Electronic Resources and Endnote</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline__cards">
+                    <div class="timeline__card card">
+                        <header class="card__header">
+                            <time class="time" datetime="2020-02-01">
+                                <span class="time__day">01</span>
+                                <span class="time__month">Feb</span>
+                            </time>
+                            <h3 class="card__title r-title">Winter Program</h3>
+
+                        </header>
+                        <div class="card__content">
+                            <ul>
+                                <li>
+                                    <p>Selenium</p>
+                                </li>
+                                <li>
+                                    <p>Neural Network</p>
+                                </li>
+                                <li>
+                                    <p>Latent Dirichlet Allocation(LDA)</p>
+                                </li>
+                                <li>
+                                    <p>Convolutional neural network(CNN) + Attention</p>
+                                </li>
+                                <li>
+                                    <p>Android</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline__group">
+                <span class="timeline__year time" aria-hidden="true">2018</span>
+                <div class="timeline__cards">
+                    <div class="timeline__card card">
+                        <header class="card__header">
+                            <time class="time" datetime="2020-07-1">
+                                <span class="time__day">01</span>
+                                <span class="time__month">Jul</span>
+                            </time>
+                            <h3 class="card__title r-title">Summer Program</h3>
+
+                        </header>
+                        <div class="card__content">
+                            <ul>
+                                <li>
+                                    <p>PHP + JQuery</p>
+                                </li>
+                                <li>
+                                    <p>VB6</p>
+                                </li>
+                                <li>
+                                    <p>Spark</p>
+                                </li>
+                                <li>
+                                    <p>R Language</p>
+                                </li>
+                                <li>
+                                    <p>Information Retrival + Semantic + Ontology</p>
+                                </li>
+                                <li>
+                                    <p>Python</p>
+                                </li>
+                                <li>
+                                    <p>Linux</p>
+                                </li>
+                                <li>
+                                    <p>Git</p>
+                                </li>
+                                <li>
+                                    <p>Statistics</p>
+                                </li>
+                                <li>
+                                    <p>Electronic Resources and Endnote</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline__cards">
+                    <div class="timeline__card card">
+                        <header class="card__header">
+                            <time class="time" datetime="2020-02-01">
+                                <span class="time__day">01</span>
+                                <span class="time__month">Feb</span>
+                            </time>
+                            <h3 class="card__title r-title">Winter Program</h3>
+
+                        </header>
+                        <div class="card__content">
+                            <ul>
+                                <li>
+                                    <p>Git</p>
+                                </li>
+                                <li>
+                                    <p>Android Studio</p>
+                                </li>
+                                <li>
+                                    <p>Deep Learning(DL) Introduction</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- End Blog Details Area -->
+
+    <!-- start footer area -->
+    <!-- <footer class="footer-area pt-100 pb-70 bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5 col-sm-6 col-12">
+                    <div class="footer-widget">
+                        <div class="navbar-brand">
+                            <a href="index.html">
+                                <img src="assets/img/logos/logo_dark.png" alt="image" />
+                            </a>
+                        </div>
+                        <p>Grursus mal suada faci Lorem to the ipsum dolarorit more ame tion more consectetu.</p>
+                        <div class="social-link">
+                            <a href="#" class="bg-tertiary" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="bg-success" target="_blank"><i class="fab fa-tumblr"></i></a>
+                            <a href="#" class="bg-danger" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="bg-info" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="bg-pink" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-5 col-sm-6 col-12">
+                    <div class="footer-widget">
+                        <h5>Our Services</h5>
+                        <ul class="footer-quick-links">
+                            <li><a href="service-details.html">Interface Design</a></li>
+                            <li><a href="service-details.html">SEO Optimizer</a></li>
+                            <li><a href="service-details.html">Digital Marketing</a></li>
+                            <li><a href="service-details.html">Market Monitor</a></li>
+                            <li><a href="service-details.html">Graphic Design</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-5 col-sm-6 col-12">
+                    <div class="footer-widget">
+                        <h5>Other Resources</h5>
+                        <ul class="footer-quick-links">
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="pricing.html">Pricing</a></li>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-5 col-sm-6 col-12">
+                    <div class="footer-widget">
+                        <h5>Contact info</h5>
+                        <div class="contact-info">
+                            <i class="envy envy-pin"></i>
+                            <p>113 Solit, White House, New Jersey, USA</p>
+                        </div>
+                        <div class="contact-info">
+                            <i class="envy envy-call"></i>
+                            <p>
+                                <a href="tel:+001-548-159-2491">+001-548-159-2491</a>
+                            </p>
+                            <br>
+                            <p>
+                                <a href="tel:+001-548-159-2492">+001-548-159-2492</a>
+                            </p>
+                        </div>
+                        <div class="contact-info">
+                            <i class="envy envy-plane"></i>
+                            <p>
+                                <a href="mailTo:hello@solit.com">hello@solit.com</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+    <!-- end footer area -->
+
+    <!-- start copy right area -->
+    <!-- <div class="copy-right-area">
+        <div class="container">
+            <div class="copy-right-content">
+                <p>
+                    Copyright @2020 Solit. Designed By
+                    <a href="https://hibootstrap.com/" target="_blank">
+                        HiBootstrap.com
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div> -->
+    <!-- end copy right area-->
+
+
+
+    <div id="footer">This is footer and copyright</div>
+
+
+    <!-- jequery JS -->
+    <script src="assets/js/jquery.min.js"></script>
+    <!-- bootstrap JS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- popper JS -->
+    <script src="assets/js/popper.min.js"></script>
+    <!-- magnific popup JS -->
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <!-- owl carousel JS -->
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <!-- meanmenu JS -->
+    <script src="assets/js/meanmenu.min.js"></script>
+    <!-- form validator -->
+    <script src="assets/js/form-validator.min.js"></script>
+    <!-- contact form JS -->
+    <script src="assets/js/contact-form-script.js"></script>
+    <!-- ajaxchimp JS -->
+    <script src="assets/js/jquery.ajaxchimp.min.js"></script>
+    <!-- main JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
