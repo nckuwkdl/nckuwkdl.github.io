@@ -179,7 +179,7 @@
                     '<div>',
                     // '<a href="' + itemData.email + '" class="bg-tertiary" target="_blank"><i class="fab fa-facebook-f"></i></a>',
                     // '<a href="' + itemData.email + '" class="bg-tertiary" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>',
-                    // itemData.email,
+                    itemData.email,
                     itemData.thesis,
                     itemData.fb,
                     // '<a href="' + itemData.thesis + '" class="bg-tertiary" target="_blank"><i class="fas fa-book"></i></a>',
@@ -219,11 +219,11 @@
                         //     // does exist
                         //     tmpAlumni["img"] = cellData[7]
                         // }
-                        // if (cellData[4]) {
-                        //     tmpAlumni["email"] = '<a href=mailto:"' + cellData[4] + '" class="bg-tertiary" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>'
-                        // } else{
-                        //     tmpAlumni["email"] = '<a href=mailto:"' + '" class="bg-tertiary" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>'
-                        // }
+                        if (cellData[4]) {
+                            tmpAlumni["email"] = '<a href=mailto:"' + cellData[4] + '" class="bg-tertiary" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>'
+                        } else{
+                            tmpAlumni["email"] = '<a href=mailto:"' + '" class="bg-tertiary" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>'
+                        }
                         if (cellData[5]){
                             tmpAlumni["fb"] = '<a href=https://www.facebook.com/' + cellData[5] + ' class="bg-tertiary" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>'
                         } else{
